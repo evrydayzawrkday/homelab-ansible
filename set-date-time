@@ -1,0 +1,7 @@
+- hosts: nondocker, docker
+  user: adamfarage
+  become: true
+  tasks:
+    - name: "data and time"
+      ansible.builtin.debug:
+        var: ansible_date_time
