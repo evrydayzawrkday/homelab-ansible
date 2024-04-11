@@ -1,0 +1,21 @@
+- name: Update docker images
+  hosts: docker
+  user: adamfarage
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Check and pull new image
+      community.docker.docker_compose:
+        project_src: /docker
+        files:
+          - "docker-compose.yaml"
+        pull: yes
+    - name: Bring online new docker images
+      community.docker.docker_compose:
+        project_src: /docker
+        files:
+          - "docker-compose.yaml"
+        state: present
+    - name: Prune old docker images
+      community.docker.docker_prune:
+        images: yes
