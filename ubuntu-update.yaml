@@ -1,0 +1,19 @@
+- hosts: nondocker, docker
+  user: adamfarage
+  become: true
+  tasks:
+    - name: Upgrade all installed packages in Ubuntu
+      apt:
+        name: "*"
+        state: latest
+        update_cache: yes
+        force_apt_get: yes
+    - name: Update cache
+      apt:
+        update_cache: yes
+    - name: Remove packages no longer required
+      apt:
+        autoclean: yes
+    - name: Remove dependencies no longer required
+      apt:
+        autoremove: yes
