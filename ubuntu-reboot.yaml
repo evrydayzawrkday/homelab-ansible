@@ -1,0 +1,6 @@
+- hosts: nondocker, docker
+  user: adamfarage
+  become: true
+  tasks:
+    - name: Reboot Systems
+      reboot:
